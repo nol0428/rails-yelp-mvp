@@ -1,0 +1,29 @@
+<%= simple_form_for(restaurant) do |f| %>
+  <div class="mb-3">
+    <%= f.input :name,
+                input_html: { class: "form-control" },
+                label_html: { class: "form-label fw-bold text-dark" } %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.input :address,
+                input_html: { class: "form-control" },
+                label_html: { class: "form-label fw-bold text-dark" } %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.input :category,
+                input_html: { class: "form-control" },
+                label_html: { class: "form-label fw-bold text-dark" } %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.input :phone_number,
+                input_html: { class: "form-control" },
+                label_html: { class: "form-label fw-bold text-dark" } %>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <%= f.submit "Submit", class: "btn btn-primary btn-lg px-4" %>
+  </div>
+<% end %>

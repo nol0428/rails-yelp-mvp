@@ -1,0 +1,12 @@
+<div class="container my-5">
+  <div class="card shadow-sm p-4 bg-light border-0 rounded-4 mb-4">
+    <h1 class="text-center mb-4">Add a New Restaurant</h1>
+    <%= render "form", restaurant: @restaurant %>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <%= link_to restaurants_path, class: "btn btn-primary btn-lg" do %>
+      <i class="fa-solid fa-house me-2"></i> Home
+    <% end %>
+  </div>
+</div>

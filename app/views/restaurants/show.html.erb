@@ -1,0 +1,80 @@
+<div class="container my-5">
+
+  <!-- Restaurant Card -->
+  <div class="card shadow-sm border-0 rounded-4">
+    <div class="card-body p-5">
+      <h1 class="display-5 fw-bold mb-4 text-center">
+        <%= @restaurant.name %>
+      </h1>
+
+      <ul class="list-group list-group-flush mb-4 rounded-3 overflow-hidden">
+        <li class="list-group-item">
+          <span class="fw-semibold me-2">Address:</span><%= @restaurant.address %>
+        </li>
+        <li class="list-group-item">
+          <span class="fw-semibold me-2">Category:</span><%= @restaurant.category.capitalize %>
+        </li>
+        <li class="list-group-item">
+          <span class="fw-semibold me-2">Phone Number:</span><%= @restaurant.phone_number %>
+        </li>
+      </ul>
+
+      <div class="d-flex justify-content-center gap-3">
+        <%= link_to "Edit", edit_restaurant_path(@restaurant),
+              class: "btn btn-lg btn-primary px-4" %>
+        <%= link_to "Back to Restaurants", restaurants_path,
+              class: "btn btn-lg btn-outline-secondary px-4" %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reviews -->
+  <div class="mt-5">
+    <h2 class="h4 fw-bold mb-3">Reviews</h2>
+
+    <% if @restaurant.reviews.any? %>
+      <ul class="list-group mb-4 rounded-3 shadow-sm">
+        <% @restaurant.reviews.each do |review| %>
+          <li class="list-group-item d-flex align-items-start justify-content-between">
+            <div class="me-3">
+              <div class="fw-semibold mb-1"><%= review.content %></div>
+              <div class="text-muted small">Posted <%= time_ago_in_words(review.created_at) %> ago</div>
+            </div>
+            <span class="badge bg-light text-dark border">
+              <%= review.rating %>/5
+            </span>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <div class="alert alert-light border" role="alert">
+        No reviews yet. Be the first to review!
+      </div>
+    <% end %>
+
+    <!-- Add Review -->
+    <div class="card shadow-sm border-0 rounded-4">
+      <div class="card-body">
+        <h3 class="h5 mb-3">Add a review</h3>
+        <%= simple_form_for [@restaurant, @review] do |f| %>
+          <div class="row g-3">
+            <div class="col-12">
+              <%= f.input :content, label: "Your review",
+                          input_html: { rows: 3, class: "form-control" },
+                          wrapper_html: { class: "mb-2" } %>
+            </div>
+            <div class="col-12 col-sm-4">
+              <%= f.input :rating, as: :select,
+                          collection: 0..5, prompt: "Select a rating",
+                          input_html: { class: "form-select" } %>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end mt-3">
+            <%= f.button :submit, "Submit review", class: "btn btn-primary px-4" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</div>
